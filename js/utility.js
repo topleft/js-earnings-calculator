@@ -20,13 +20,12 @@ function calcTotalEarnings(array){
 
   for (var i = 0; i < array.length; i++) {
     totalEarnings += array[i].tip;
-    console.log("Total: "+ totalEarnings)
   }
-    earnings.totalTips = totalEarnings;
-    earnings.mealCount = array.length;
 
+  earnings.totalTips = totalEarnings;
+  earnings.mealCount = array.length;
   earnings.avgTip = earnings.totalTips/earnings.mealCount;
-  console.log(earnings);
+
   return earnings;
 }
 

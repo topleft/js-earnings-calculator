@@ -18,41 +18,56 @@ $(document).on('ready', function() {
       mealDetails[pair[0]] = pair[1]
       console.log(mealDetails);
     }
-    // clear after submit
-    for (var i = 0; i < $(".form-input").length; i++) {
-      $($(".form-input")[i]).val("");
-    }
-
 
     var mealPrice = parseInt(mealDetails["meal-price"]);
     var taxRate = parseFloat(mealDetails["meal-taxrate"]);
     var tipPercent = parseFloat(mealDetails["meal-tiprate"]);
 
 
-
+    //calc totals
     var totalCharges = calcTotalCharges(mealPrice, taxRate, tipPercent);
     totalChargesArray.push(totalCharges);
 
-    $($(".totals p")[0]).html("Subtotal: "+totalCharges.subTotal);
-    $($(".totals p")[1]).html("Tip: "+totalCharges.tip)
-    $($(".totals p")[2]).html("Total: "+totalCharges.total);
+    // put totals on DOM
+    $($(".totals p")[0]).html("Subtotal: "+"<span>"+totalCharges.subTotal+"</span>");
+    $($(".totals p")[1]).html("Tip: "+"<span>"+totalCharges.tip+"</span>");
+    $($(".totals p")[2]).html("Total: "+"<span>"+totalCharges.total+"</span>");
 
-    console.log(totalChargesArray);
+    // calc runnung totals
     var earnings = calcTotalEarnings(totalChargesArray);
+    // put running totals on DOM
+    $($(".totals p")[3]).html("Total Tips: " + "<span>" + earnings.totalTips + "</span>");
+    $($(".totals p")[4]).html("Meal Count: " + "<span>" + earnings.mealCount + "</span>");
+    $($(".totals p")[5]).html("Average Tip: " + "<span>"+ earnings.avgTip + "</span>");
 
-    $($(".totals p")[3]).html("Total Tips: "+earnings.totalTips);
-    $($(".totals p")[4]).html("Meal Count: "+earnings.mealCount)
-    $($(".totals p")[5]).html("Average Tip: "+earnings.avgTip);
+    earnings = {}
+
+        // clear after submit
+    for (var i = 0; i < $(".form-input").length; i++) {
+      $($(".form-input")[i]).val("");
+    }
 
   });
 
-    // clear button
-    $($(".btn")[1]).on("click", function(e) {
+
+
+  // clear button
+  $($(".btn")[1]).on("click", function(e) {
+  e.preventDefault();
+    for (var i = 0; i < $(".form-input").length; i++) {
+      $($(".form-input")[i]).val("");
+    }
+  });
+
+
+  $($(".btn")[2]).on("click", function(e) {
     e.preventDefault();
-      for (var i = 0; i < $(".form-input").length; i++) {
-        $($(".form-input")[i]).val("");
-      }
-    });
+    totalChargesArray = [];
+    for (var i = 0; i < $(".totals span").length; i++) {
+      $($(".totals span")[i]).html("");
+    };
+
+  });
 
 });
 
