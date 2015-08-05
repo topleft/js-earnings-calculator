@@ -8,7 +8,7 @@ $(document).on('ready', function() {
     e.preventDefault();
 
     mealDetails = {};
-
+    // creates object array
     for (var i = 0; i < $(".form-input").length; i++) {
       var input = $($(".form-input")[i]).serialize();
       var pair = input.split("=");
@@ -16,26 +16,23 @@ $(document).on('ready', function() {
       mealDetails[pair[0]] = pair[1]
       console.log(mealDetails);
     }
-
+    // clear after submit
     for (var i = 0; i < $(".form-input").length; i++) {
       $($(".form-input")[i]).val("");
     }
-    console.log("hello");
 
-    // var mealPrice = parseInt(mealDetails["meal-price"])
-    // var taxRate = parseFloat(mealDetails["meal-taxrate"])
-    // var tipPercent = parseFloat(mealDetails["meal-tiprate"])
 
-    // var subTotal = (mealPrice*taxRate) + mealPrice
-    // console.log(subTotal);
-    // var tip = mealPrice*tipPercent;
-    // var total = subTotal + tip
+    var mealPrice = parseInt(mealDetails["meal-price"])
+    var taxRate = parseFloat(mealDetails["meal-taxrate"])
+    var tipPercent = parseFloat(mealDetails["meal-tiprate"])
 
 
 
-    $($(".totals p")[0]).html("Subtotal: "+subTotal)
-    $($(".totals p")[1]).html("Tip: "+tip)
-    $($(".totals p")[2]).html("Total: "+total)
+    var totalCharges = calcTotalCharges(mealPrice, taxRate, tipPercent);
+
+    $($(".totals p")[0]).html("Subtotal: "+totalCharges.subTotal);
+    $($(".totals p")[1]).html("Tip: "+totalCharges.tip)
+    $($(".totals p")[2]).html("Total: "+totalCharges.total);
 
   });
 

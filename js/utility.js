@@ -1,18 +1,20 @@
-var mealPrice = parseInt(mealDetails["meal-price"])
-var taxRate = parseFloat(mealDetails["meal-taxrate"])
-var tipPercent = parseFloat(mealDetails["meal-tiprate"])
 
 
-var total = subTotal + tip
 
-function calcSubTotal (mealPrice, taxRate) {
-  return (mealPrice*taxRate) + mealPrice;
+
+function calcTotalCharges (mealPrice, taxRate, tipPercent){
+  var totalCharges = {}
+
+  totalCharges.subTotal = (mealPrice*taxRate) + mealPrice;
+  totalCharges.tip = mealPrice*tipPercent;
+  totalCharges.total = totalCharges.subTotal + totalCharges.tip;
+  console.log(totalCharges);
+  return totalCharges;
 }
 
-function calcTip (mealPrice, tipPercent) {
-  return (mealPrice * tipPercent);
-}
 
-function calTotal (subTotal, tip) {
-  return (subTotal + tip);
-}
+
+
+
+
+
