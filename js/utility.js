@@ -29,6 +29,11 @@ function calcTotalEarnings(array){
   return earnings;
 }
 
+module.exports = {
+  calcTotalCharges : calcTotalCharges,
+  calcTotalEarnings : calcTotalEarnings
+}
+
 
 
 
