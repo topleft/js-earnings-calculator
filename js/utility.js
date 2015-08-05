@@ -14,6 +14,22 @@ function calcTotalCharges (mealPrice, taxRate, tipPercent){
 
 
 
+function calcTotalEarnings(array){
+  var earnings = {};
+  var totalEarnings = 0;
+
+  for (var i = 0; i < array.length; i++) {
+    totalEarnings += array[i].tip;
+    console.log("Total: "+ totalEarnings)
+  }
+    earnings.totalTips = totalEarnings;
+    earnings.mealCount = array.length;
+
+  earnings.avgTip = earnings.totalTips/earnings.mealCount;
+  console.log(earnings);
+  return earnings;
+}
+
 
 
 
