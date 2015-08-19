@@ -67,6 +67,4 @@ Server.prototype.calcTipPercent = function(){
   return this.sumTips()/this.totalSales;
 };
 
-// fleshing out server totals
-// after that integrate into main.js
 
