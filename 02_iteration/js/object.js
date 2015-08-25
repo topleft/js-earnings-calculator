@@ -7,10 +7,11 @@ var Meal = function(price, taxPercent, tipPercent){
   this.tip = null;
   this.tax = null;
   this.total = null;
+  this.subTotal = null;
 };
 
 Meal.prototype.calcTip = function(){
-  this.tip = this.price * this.tipPercent;
+  this.tip = this.calcSubTotal() * this.tipPercent;
   return this.tip;
 };
 
@@ -20,7 +21,8 @@ Meal.prototype.calcTax = function(){
 };
 
 Meal.prototype.calcSubTotal = function(){
-  return this.calcTax()+this.price;
+  this.subTotal = this.calcTax()+this.price
+  return this.subTotal;
 };
 
 Meal.prototype.calcTotal = function(){
@@ -48,23 +50,22 @@ Server.prototype.sumTips = function(){
     tips += this.meals[i].tip;
   };
   this.totalTips = tips;
-  return tips
+  return tips;
 };
 
 Server.prototype.sumSales = function(){
   var total = 0;
   for (var i = 0; i < this.meals.length; i++) {
-    tips += this.meals[i].total;
+    total += this.meals[i].subTotal;
   };
-  this.totalTips = total;
+  this.totalSales = total;
   return total;
 };
 
 Server.prototype.calcAvgTip = function(){
   return this.sumTips()/this.meals.length;
 };
-Server.prototype.calcTipPercent = function(){
-  return this.sumTips()/this.totalSales;
+Server.prototype.calcTipRatio = function(){
+  return ((this.sumTips()/this.sumSales()) * 100).toFixed(2);
 };
-
 
